@@ -6,21 +6,24 @@ $(function(){
     $('#color').colorpicker(); // Colopicker
     
 
-    var base_url='http://localhost/fullcalendar/'; // Here i define the base_url
+    var base_url='http://localhost/ci_cal/'; // Here i define the base_url
 
     // Fullcalendar
     $('#calendar').fullCalendar({
         header: {
             left: 'prev, next, today',
             center: 'title',
-             right: 'month, basicWeek, basicDay'
+             right: 'month,agendaWeek,agendaDay,listWeek'
         },
         // Get all events stored in database
+        navLinks: true, // can click day/week names to navigate views
         eventLimit: true, // allow "more" link when too many events
         events: base_url+'calendar/getEvents',
         selectable: true,
         selectHelper: true,
-        editable: true, // Make the event resizable true           
+        editable: true, // Make the event resizable true  
+
+
             select: function(start, end) {
                 
                 $('#start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
@@ -105,7 +108,7 @@ $(function(){
         eventClick: function(calEvent, jsEvent, view) {
             // Set currentEvent variable according to the event clicked in the calendar
             currentEvent = calEvent;
-
+            
             // Open modal to edit or delete event
             modal({
                 // Available buttons when editing
@@ -131,10 +134,15 @@ $(function(){
     // Prepares the modal window according to data passed
     function modal(data) {
         // Set modal title
+
         $('.modal-title').html(data.title);
         // Clear buttons except Cancel
         $('.modal-footer button:not(".btn-default")').remove();
         // Set input values
+
+        // FIX UPDATE: Latest Full Calendar
+        $('#title_id').val(data.event ? data.event.id : ''); 
+
         $('#title').val(data.event ? data.event.title : '');        
         $('#description').val(data.event ? data.event.description : '');
         $('#color').val(data.event ? data.event.color : '#3a87ad');
@@ -169,7 +177,11 @@ $(function(){
     $('.modal').on('click', '#update-event',  function(e){
         if(validator(['title', 'description'])) {
             $.post(base_url+'calendar/updateEvent', {
-                id: currentEvent._id,
+
+                // Fix 
+                // id: currentEvent._id,
+                id: $('#title_id').val(),
+
                 title: $('#title').val(),
                 description: $('#description').val(),
                 color: $('#color').val()
@@ -187,7 +199,7 @@ $(function(){
 
     // Handle Click on Delete Button
     $('.modal').on('click', '#delete-event',  function(e){
-        $.get(base_url+'calendar/deleteEvent?id=' + currentEvent._id, function(result){
+        $.get(base_url+'calendar/deleteEvent?id=' + $('#title_id').val(), function(result){
             $('.alert').addClass('alert-success').text('Event deleted successfully !');
             $('.modal').modal('hide');
             $('#calendar').fullCalendar("refetchEvents");
@@ -199,7 +211,7 @@ $(function(){
     {
         setTimeout(function() {
                     $('.alert').removeClass('alert-success').text('');
-                }, 2000);
+                }, 2500);
     }
 
 
