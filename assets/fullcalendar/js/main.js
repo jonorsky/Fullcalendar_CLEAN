@@ -24,10 +24,7 @@ $(function(){
 
 
             select: function(start, end) {
-                
-                $('#start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
-                $('#end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
-                 // Open modal to add event
+               
             modal({
                 // Available buttons when adding
                 buttons: {
@@ -39,6 +36,11 @@ $(function(){
                 },
                 title: 'Add Event' // Modal title
             });
+
+            // Fix 7/3/2018 - Show Modal First to Override Blank Value of Forms
+            $('#start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
+            $('#end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+
             }, 
            
          eventDrop: function(event, delta, revertFunc,start,end) {  
@@ -130,9 +132,14 @@ $(function(){
 
     });
 
+
+    // [#]Semi
     // Prepares the modal window according to data passed
     function modal(data) {
         // Set modal title
+
+        //Debug Team Vidallo
+        //console.log(data);
 
         $('.modal-title').html(data.title);
         // Clear buttons except Cancel
@@ -141,6 +148,11 @@ $(function(){
 
         // FIX UPDATE: Latest Full Calendar
         $('#title_id').val(data.event ? data.event.id : ''); 
+
+        // Fix Added: 7/3/2018
+        $('#start').val(data.event ? data.event.start._i: ''); 
+        $('#end').val(data.event ? data.event.end._i : ''); 
+
 
         $('#title').val(data.event ? data.event.title : '');        
         $('#description').val(data.event ? data.event.description : '');
@@ -153,15 +165,21 @@ $(function(){
         $('.modal').modal('show');
     }
 
+
     // Handle Click on Add Button
-    $('.modal').on('click', '#add-event',  function(e){
-        if(validator(['title', 'description'])) {
+    $('.modal').on('click', '#add-event',  function(e,date){
+
+        // Fix 7/3/2018 - Validator Checker
+        // Add id name of the form in validator[]
+        if(validator(['title', 'description','start','end'])) {
             $.post(base_url+'calendar/addEvent', {
+
                 title: $('#title').val(),
                 description: $('#description').val(),
                 color: $('#color').val(),
                 start: $('#start').val(),
                 end: $('#end').val()
+
             }, function(result){
                 $('.alert').addClass('alert-success').text('Event added successfuly');
                 $('.modal').modal('hide');
@@ -171,7 +189,7 @@ $(function(){
         }
     });
 
-
+    // [#]Fixed
     // Handle click on Update Button
     $('.modal').on('click', '#update-event',  function(e){
         if(validator(['title', 'description'])) {
@@ -180,6 +198,9 @@ $(function(){
                 // Fix 
                 // id: currentEvent._id,
                 id: $('#title_id').val(),
+
+                start:$('#start').val(),
+                end:$('#end').val(),
 
                 title: $('#title').val(),
                 description: $('#description').val(),
@@ -195,7 +216,7 @@ $(function(){
     });
 
 
-
+    // [#]Fixed
     // Handle Click on Delete Button
     $('.modal').on('click', '#delete-event',  function(e){
         $.get(base_url+'calendar/deleteEvent?id=' + $('#title_id').val(), function(result){
@@ -217,11 +238,28 @@ $(function(){
     // Dead Basic Validation For Inputs
     function validator(elements) {
         var errors = 0;
+
+        // Check if Value in Form is empty
         $.each(elements, function(index, element){
             if($.trim($('#' + element).val()) == '') errors++;
         });
+
+        // Fix - 7/3/2018 Added Validator in Date Format
+        $start_value = $.trim($('#start').val());
+        $end_value   = $.trim($('#end').val());
+
+        // Debug
+        //alert($.trim($('#start').val()));
+        //alert(moment($start_value, 'YYYY-MM-DD HH:mm:ss',true).isValid());
+
+        // Fix - 7/3/2018 Added Validator in Date Format
+        if(!moment($start_value, 'YYYY-MM-DD HH:mm:ss',true).isValid())
+            alert('Error Start Date Format');
+        if(!moment($end_value, 'YYYY-MM-DD HH:mm:ss',true).isValid())
+            alert('Error End Date Format');
+        
         if(errors) {
-            $('.error').html('Please insert title and description');
+            $('.error').html('Please Provide Complete Details!');
             return false;
         }
         return true;

@@ -53,8 +53,9 @@
                     <div class="modal-body">
                         <div class="error"></div>
                         <form class="form-horizontal" id="crud-form">
-                        <input type="hidden" id="start">
-                        <input type="hidden" id="end">
+                        
+                        <!--<input type="hidden" id="start">
+                        <input type="hidden" id="end">-->
 
                             <!-- FIX UPDATE: Latest FullCalendar-->
                             <div class="form-group">
@@ -78,6 +79,22 @@
                                     <textarea class="form-control" id="description" name="description"></textarea>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="start">Start Date</label>
+                                <div class="col-md-4">
+                                    <input id="start" name="start" type="text" class="form-control input-md" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="end">End Date</label>
+                                <div class="col-md-4">
+                                    <input id="end" name="end" type="text" class="form-control input-md" />
+                                </div>
+                            </div>
+                          
+
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="color">Color</label>

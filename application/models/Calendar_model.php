@@ -30,6 +30,12 @@ class Calendar_model extends CI_Model {
 
 	$sql = "UPDATE events SET title = ?, description = ?, color = ? WHERE id = ?";
 	$this->db->query($sql, array($_POST['title'],$_POST['description'], $_POST['color'], $_POST['id']));
+
+	// Fix: 7/3/2018 - Reserved table name 'end' to php
+	$sql_child = "UPDATE events SET  events.start = ? ,events.end = ?  WHERE id = ?";
+	$this->db->query($sql_child, array($_POST['start'],$_POST['end'], $_POST['id']));
+
+
 		return ($this->db->affected_rows()!=1)?false:true;
 	}
 

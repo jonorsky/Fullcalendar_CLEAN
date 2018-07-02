@@ -142,6 +142,8 @@ $(function(){
         // FIX UPDATE: Latest Full Calendar
         $('#title_id').val(data.event ? data.event.id : ''); 
 
+        $('#start').val(data.event ? data.event.start : ''); 
+
         $('#title').val(data.event ? data.event.title : '');        
         $('#description').val(data.event ? data.event.description : '');
         $('#color').val(data.event ? data.event.color : '#3a87ad');
