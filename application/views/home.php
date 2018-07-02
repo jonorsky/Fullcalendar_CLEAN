@@ -1,43 +1,35 @@
-
-
 <!DOCTYPE html>
 <html>
     <head>
     <title>Full Calendar CRUD</title>
         <meta charset='utf-8' />
-        <link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- EDIT
-        <link href='<?php echo base_url();?>assets/css/fullcalendar.css' rel='stylesheet' />
-        -->
+        <!-- CSS --> 
+        <link href="<?php echo base_url();?>assets/fullcalendar/css/bootstrap.min.css" rel="stylesheet">
 
-        <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css' rel='stylesheet' />
+        <link href='<?php echo base_url();?>assets/fullcalendar/css/fullcalendar.css' rel='stylesheet' />
 
-        <link href="<?php echo base_url();?>assets/css/bootstrapValidator.min.css" rel="stylesheet" />        
-        <link href="<?php echo base_url();?>assets/css/bootstrap-colorpicker.min.css" rel="stylesheet" />
+        <link href="<?php echo base_url();?>assets/fullcalendar/css/bootstrapValidator.min.css" rel="stylesheet" /> 
+
+        <link href="<?php echo base_url();?>assets/fullcalendar/css/bootstrap-colorpicker.min.css" rel="stylesheet" />
+
         <!-- Custom css  -->
-        <link href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet" />
+        <link href="<?php echo base_url();?>assets/fullcalendar/css/custom.css" rel="stylesheet" />
 
-        <!-- EDIT
-        <script src='<?php echo base_url();?>assets/js/moment.min.js'></script>
-        -->
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js'></script>
+        <!-- JS -->
+        <script src="<?php echo base_url();?>assets/fullcalendar/js/moment.min.js"></script>
 
+        <script src="<?php echo base_url();?>assets/fullcalendar/js/jquery.min.js"></script>
 
-        <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
-        <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-        <script src="<?php echo base_url();?>assets/js/bootstrapValidator.min.js"></script>
+        <script src="<?php echo base_url();?>assets/fullcalendar/js/bootstrap.min.js"></script>
 
-        <!-- EDIT
-        <script src="<?php echo base_url();?>assets/js/fullcalendar.min.js"></script>
-        -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+        <script src="<?php echo base_url();?>assets/fullcalendar/js/bootstrapValidator.min.js"></script>
+
+        <script src="<?php echo base_url();?>assets/fullcalendar/js/fullcalendar.min.js"></script>
         
-
-        <script src='<?php echo base_url();?>assets/js/bootstrap-colorpicker.min.js'></script>
+        <script src='<?php echo base_url();?>assets/fullcalendar/js/bootstrap-colorpicker.min.js'></script>
         
-
-        <script src='<?php echo base_url();?>assets/js/main.js'></script>
+        <script src='<?php echo base_url();?>assets/fullcalendar/js/main.js'></script>
         
     </head>
     <body>
