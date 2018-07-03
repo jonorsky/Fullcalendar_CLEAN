@@ -7,8 +7,10 @@ class Calendar_model extends CI_Model {
 /*Read the data from DB */
 	Public function getEvents()
 	{
-		
-	$sql = "SELECT * FROM events WHERE events.start BETWEEN ? AND ? ORDER BY events.start ASC";
+	
+	# Future Fix: Filter View, add after 'AND ?' with 'AND color='#3a87ad'
+
+	$sql = "SELECT * FROM events WHERE events.start BETWEEN ? AND ?  ORDER BY events.start ASC";
 	return $this->db->query($sql, array($_GET['start'], $_GET['end']))->result();
 
 	}

@@ -41,6 +41,20 @@ $(function(){
             $('#start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
             $('#end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
 
+            // Fix Added - DEBUG: 7/4/2018 DatePicker
+            /*$('input[name="end"]').daterangepicker({
+                minDate: moment(start),
+                singleDatePicker: true,
+                timePicker: true,
+                drops: 'up',
+                timePickerIncrement: 30,
+                locale: {
+                  format: 'YYYY-MM-DD HH:mm:ss'
+                }
+              });*/
+
+            //$('input[name="end"]').data('daterangepicker').setStartDate('2018-7-25 10:00:00');
+
             }, 
            
          eventDrop: function(event, delta, revertFunc,start,end) {  
@@ -128,6 +142,21 @@ $(function(){
                 title: 'Edit Event "' + calEvent.title + '"',
                 event: calEvent
             });
+
+            // Debug: For DatePicker
+            //alert($('input[name="start"]').val());
+            /*
+            $('input[name="end"]').daterangepicker({
+                minDate:$('input[name="start"]').val(),
+                singleDatePicker: true,
+                timePicker: true,
+                drops: 'up',
+                timePickerIncrement: 30,
+                locale: {
+                  format: 'YYYY-MM-DD HH:mm:ss'
+                }
+              });*/
+              
         }
 
     });
@@ -152,7 +181,7 @@ $(function(){
         // Fix Added: 7/3/2018
         $('#start').val(data.event ? data.event.start._i: ''); 
         $('#end').val(data.event ? data.event.end._i : ''); 
-
+ 
 
         $('#title').val(data.event ? data.event.title : '');        
         $('#description').val(data.event ? data.event.description : '');
@@ -253,10 +282,14 @@ $(function(){
         //alert(moment($start_value, 'YYYY-MM-DD HH:mm:ss',true).isValid());
 
         // Fix - 7/3/2018 Added Validator in Date Format
-        if(!moment($start_value, 'YYYY-MM-DD HH:mm:ss',true).isValid())
+        if(!moment($start_value, 'YYYY-MM-DD HH:mm:ss',true).isValid()){
             alert('Error Start Date Format');
-        if(!moment($end_value, 'YYYY-MM-DD HH:mm:ss',true).isValid())
+            return false;
+        }
+        if(!moment($end_value, 'YYYY-MM-DD HH:mm:ss',true).isValid()){
             alert('Error End Date Format');
+            return false;
+        }
         
         if(errors) {
             $('.error').html('Please Provide Complete Details!');

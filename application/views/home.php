@@ -16,20 +16,9 @@
         <!-- Custom css  -->
         <link href="<?php echo base_url();?>assets/fullcalendar/css/custom.css" rel="stylesheet" />
 
-        <!-- JS -->
-        <script src="<?php echo base_url();?>assets/fullcalendar/js/moment.min.js"></script>
-
-        <script src="<?php echo base_url();?>assets/fullcalendar/js/jquery.min.js"></script>
-
-        <script src="<?php echo base_url();?>assets/fullcalendar/js/bootstrap.min.js"></script>
-
-        <script src="<?php echo base_url();?>assets/fullcalendar/js/bootstrapValidator.min.js"></script>
-
-        <script src="<?php echo base_url();?>assets/fullcalendar/js/fullcalendar.min.js"></script>
-        
-        <script src='<?php echo base_url();?>assets/fullcalendar/js/bootstrap-colorpicker.min.js'></script>
-        
-        <script src='<?php echo base_url();?>assets/fullcalendar/js/main.js'></script>
+        <!-- For Datepicker.css -->
+        <!--
+        <link href="<?php echo base_url();?>assets/fullcalendar/css/bootstrap-datetimepicker.css" rel="stylesheet" />-->
         
     </head>
     <body>
@@ -81,28 +70,50 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="start">Start Date</label>
-                                <div class="col-md-4">
-                                    <input id="start" name="start" type="text" class="form-control input-md" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="end">End Date</label>
-                                <div class="col-md-4">
-                                    <input id="end" name="end" type="text" class="form-control input-md" />
-                                </div>
-                            </div>
-                          
-
-
-                            <div class="form-group">
                                 <label class="col-md-4 control-label" for="color">Color</label>
                                 <div class="col-md-4">
                                     <input id="color" name="color" type="text" class="form-control input-md" readonly="readonly" />
                                     <span class="help-block">Click to pick a color</span>
                                 </div>
                             </div>
+
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="start">Start</label>
+                                <div class="col-md-4">
+                                    <input id="start" name="start" type="text" class="form-control input-md" readonly="readonly" />
+                                </div>
+                            </div>
+                            
+                            <!--
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="end">End Date</label>
+                                <div class="col-md-4">
+                                    <input id="end" name="end" type="text" class="form-control input-md" />
+                                </div>
+                            </div>-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="end">End</label>
+                                <div class="col-md-4">
+                                    <div class='input-group date' id='datetimepicker1'>
+                                    <input id="end" name="end" type="text" class="form-control input-md" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--
+                            <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                             </div>-->
+
+
+                          
 
                         </form>
                     </div>
@@ -115,3 +126,60 @@
     </body>
 </html>
 
+
+ <!-- JavaScript placed at the end of the document so the pages load faster -->
+
+        <!-- JS -->
+        <script src="<?php echo base_url();?>assets/fullcalendar/js/moment.min.js"></script>
+
+        <script src="<?php echo base_url();?>assets/fullcalendar/js/jquery.min.js"></script>
+
+        <script src="<?php echo base_url();?>assets/fullcalendar/js/bootstrap.min.js"></script>
+
+        <script src="<?php echo base_url();?>assets/fullcalendar/js/bootstrapValidator.min.js"></script>
+
+        <script src="<?php echo base_url();?>assets/fullcalendar/js/fullcalendar.min.js"></script>
+        
+        <script src='<?php echo base_url();?>assets/fullcalendar/js/bootstrap-colorpicker.min.js'></script>
+        
+        <script src='<?php echo base_url();?>assets/fullcalendar/js/main.js'></script>
+
+
+        <!-- For Datepicker.js 
+        <script src='<?php echo base_url();?>assets/fullcalendar/js/bootstrap-datetimepicker.min.js'></script>   
+
+
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    format:'YYYY-MM-DD HH:mm:ss',
+
+
+                });
+            });
+        </script>
+
+        -->
+
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<!--
+        <script>
+        $(function() {
+          $('input[name="end"]').daterangepicker({
+            singleDatePicker: true,
+            timePicker: true,
+            drops: 'up',
+            timePickerIncrement: 30,
+            locale: {
+              format: 'YYYY-MM-DD HH:mm:ss'
+            }
+          });
+
+          $('input[name="end"]').data('daterangepicker').setStartDate($('#start').val);
+
+        });
+        </script>
+-->
